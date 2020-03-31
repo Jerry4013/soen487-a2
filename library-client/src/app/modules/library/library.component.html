@@ -5,10 +5,10 @@
 <mat-card class="card" *ngFor="let book of books; let i = index">
   <mat-card-content>
     <mat-card-title>{{book.title}}
-      <button class="card-button" mat-icon-button>
+      <button class="card-button" mat-icon-button (click)="confirmdelete(i)">
         <mat-icon>delete</mat-icon>
       </button>
-      <button class="card-button" mat-icon-button>
+      <button class="card-button" mat-icon-button (click)="editbook(i)">
         <mat-icon>edit</mat-icon>
       </button>
     </mat-card-title>

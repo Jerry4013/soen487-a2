@@ -12,8 +12,12 @@ import soen487.a2.library.service.BookService;
 @CrossOrigin(origins = {"*"}, allowCredentials = "true")
 public class BookController {
 
+    private final BookService bookService;
+
     @Autowired
-    private BookService bookService;
+    public BookController(BookService bookService) {
+        this.bookService = bookService;
+    }
 
     @GetMapping(value = "/list")
     public CommonReturnType getList() {

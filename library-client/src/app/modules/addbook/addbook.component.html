@@ -1,0 +1,58 @@
+<form class="example-form" [formGroup]="addBookForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="example-full-width">
+    <mat-label>Title</mat-label>
+    <input matInput
+           formControlName="title"
+           placeholder="book title"
+           name="title"
+           required
+    >
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Description</mat-label>
+    <input matInput
+           formControlName="description"
+           id="description"
+           placeholder="book description"
+           name="description"
+           required
+    >
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>ISBN</mat-label>
+    <input matInput
+           formControlName="isbn"
+           id="isbn"
+           placeholder="book isbn"
+           name="isbn"
+           required
+    >
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Author</mat-label>
+    <input matInput
+           formControlName="author"
+           id="author"
+           placeholder="book author"
+           name="author"
+           required
+    >
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Publisher</mat-label>
+    <input matInput
+           formControlName="publisher"
+           id="publisher"
+           placeholder="book publisher"
+           name="publisher"
+           required
+    >
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+  <button mat-raised-button color="primary" (click)="onCancel()">Cancel</button>
+
+</form>

@@ -15,8 +15,12 @@ import java.util.List;
 @Service
 public class BookServiceImpl implements BookService {
 
+    private final BookJpaRepository bookJpaRepository;
+
     @Autowired
-    private BookJpaRepository bookJpaRepository;
+    public BookServiceImpl(BookJpaRepository bookJpaRepository) {
+        this.bookJpaRepository = bookJpaRepository;
+    }
 
     @Override
     public BookModel[] list() {
@@ -62,7 +66,6 @@ public class BookServiceImpl implements BookService {
     @Override
     @Transactional
     public BookModel updateBook(BookModel bookModel) {
-
         return createBook(bookModel);
     }
 

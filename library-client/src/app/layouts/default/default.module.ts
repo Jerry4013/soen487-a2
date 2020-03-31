@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {DefaultComponent} from './default.component';
-import {LibraryComponent} from '../../modules/library/library.component';
+import {DeleteDialogComponent, LibraryComponent} from '../../modules/library/library.component';
 import {RouterModule} from '@angular/router';
 import {MemberComponent} from '../../modules/member/member.component';
 import {LoanComponent} from '../../modules/loan/loan.component';
@@ -19,6 +19,16 @@ import {BookService} from '../../book.service';
 import {HttpClientModule} from '@angular/common/http';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { LoginComponent } from '../../modules/login/login.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthService} from '../../auth.service';
+import {AuthGuardService} from '../../auth-guard.service';
+import { AddbookComponent } from '../../modules/addbook/addbook.component';
+
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 
@@ -29,7 +39,13 @@ import {MatButtonModule} from '@angular/material/button';
     MemberComponent,
     LoanComponent,
     ContactsComponent,
-    LeadsComponent
+    LeadsComponent,
+    LoginComponent,
+    AddbookComponent,
+    DeleteDialogComponent
+  ],
+  entryComponents: [
+    DeleteDialogComponent
   ],
   imports: [
     CommonModule,
@@ -44,8 +60,17 @@ import {MatButtonModule} from '@angular/material/button';
     MatListModule,
     HttpClientModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ],
-  providers: [BookService],
+  providers: [
+    BookService,
+    AuthService,
+    AuthGuardService
+  ],
 })
 export class DefaultModule { }

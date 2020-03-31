@@ -5,7 +5,9 @@
 export const environment = {
   production: false,
   baseUrl: 'http://localhost:8080',
-  bookList: '/book/list'
+  book: '/book',
+  list: '/list',
+  auth: '/auth'
 };
 
 /*

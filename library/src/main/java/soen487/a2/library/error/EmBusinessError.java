@@ -18,6 +18,10 @@ public enum EmBusinessError implements CommonError{
 
     //30000, transaction error
     BOOK_NOT_EXIST(30001, "Cannot find a book with this id."),
+    MEMBER_NOT_EXIST(30002, "Member does not exist"),
+    LOAN_NOT_EXIST(30003, "Loan does not exist"),
+    MEMBER_CANNOT_SAVE(30004, "Member can not be saved."),
+
     ;
 
 
