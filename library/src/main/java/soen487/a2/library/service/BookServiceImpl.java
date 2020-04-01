@@ -51,6 +51,39 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public BookModel getBookByTitle(String title) {
+        Book book = bookJpaRepository.getBookByTitle(title);
+        if (book == null) {
+            throw new BusinessException(EmBusinessError.BOOK_NOT_EXIST);
+        }
+        BookModel bookModel = new BookModel();
+        BeanUtils.copyProperties(book, bookModel);
+        return bookModel;
+    }
+
+    @Override
+    public BookModel getBookByAuthor(String author) {
+        Book book = bookJpaRepository.getBookByAuthor(author);
+        if (book == null) {
+            throw new BusinessException(EmBusinessError.BOOK_NOT_EXIST);
+        }
+        BookModel bookModel = new BookModel();
+        BeanUtils.copyProperties(book, bookModel);
+        return bookModel;
+    }
+
+    @Override
+    public BookModel getBookByIsbn(String isbn) {
+        Book book = bookJpaRepository.getBookByIsbn(isbn);
+        if (book == null) {
+            throw new BusinessException(EmBusinessError.BOOK_NOT_EXIST);
+        }
+        BookModel bookModel = new BookModel();
+        BeanUtils.copyProperties(book, bookModel);
+        return bookModel;
+    }
+
+    @Override
     @Transactional
     public BookModel createBook(BookModel bookModel) {
         if (bookModel == null) {

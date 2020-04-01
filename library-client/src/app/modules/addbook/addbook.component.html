@@ -1,58 +1,44 @@
-<form class="example-form" [formGroup]="addBookForm" (ngSubmit)="onSubmit()">
-  <mat-form-field class="example-full-width">
-    <mat-label>Title</mat-label>
-    <input matInput
-           formControlName="title"
-           placeholder="book title"
-           name="title"
-           required
-    >
-  </mat-form-field>
+<h2>{{pageTitle}}</h2>
+<mat-card class="card" *ngIf="editMode">
+  <mat-card-content>
+    <mat-card-title>{{book.title}}</mat-card-title>
+    <h3>Description: {{book.description}}</h3>
+    <h3>ISBN: {{book.isbn}}</h3>
+    <h3>Author: {{book.author}}</h3>
+    <h3>Publisher: {{book.publisher}}</h3>
+  </mat-card-content>
+</mat-card>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="container">
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput class="form-control" ngModel placeholder="book title" name="title" required>
+    </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <mat-label>Description</mat-label>
-    <input matInput
-           formControlName="description"
-           id="description"
-           placeholder="book description"
-           name="description"
-           required
-    >
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput ngModel rows="5" class="form-control" id="description" placeholder="book description"
+                name="description" required></textarea>
+    </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <mat-label>ISBN</mat-label>
-    <input matInput
-           formControlName="isbn"
-           id="isbn"
-           placeholder="book isbn"
-           name="isbn"
-           required
-    >
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>ISBN</mat-label>
+      <input matInput ngModel class="form-control" id="isbn" placeholder="book isbn" name="isbn" required>
+    </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <mat-label>Author</mat-label>
-    <input matInput
-           formControlName="author"
-           id="author"
-           placeholder="book author"
-           name="author"
-           required
-    >
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>Author</mat-label>
+      <input matInput ngModel class="form-control" id="author" placeholder="book author" name="author" required>
+    </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <mat-label>Publisher</mat-label>
-    <input matInput
-           formControlName="publisher"
-           id="publisher"
-           placeholder="book publisher"
-           name="publisher"
-           required
-    >
-  </mat-form-field>
-  <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
-  <button mat-raised-button color="primary" (click)="onCancel()">Cancel</button>
+    <mat-form-field>
+      <mat-label>Publisher</mat-label>
+      <input matInput ngModel class="form-control" id="publisher" placeholder="book publisher" name="publisher" required>
+    </mat-form-field>
+  </div>
 
+  <button mat-raised-button color="primary" type="submit">Save</button>
+  <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
 </form>
+
+

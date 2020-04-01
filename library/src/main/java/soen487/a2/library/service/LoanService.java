@@ -5,6 +5,7 @@ import soen487.a2.library.model.LoanModel;
 import java.util.List;
 
 public interface LoanService {
+    List<LoanModel> getAllLoans();
     List<LoanModel> getAllLoansByBook(String title);
     List<LoanModel> getAllLoansByMember(String member);
     LoanModel getLoan(int id);

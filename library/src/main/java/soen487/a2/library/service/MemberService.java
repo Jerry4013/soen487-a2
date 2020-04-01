@@ -10,6 +10,8 @@ public interface MemberService {
 
     MemberModel getMember(Integer id);
 
+    MemberModel getMemberByName(String name);
+
     MemberModel addMember(MemberModel member);
 
     MemberModel updateMember(MemberModel member);

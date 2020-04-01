@@ -1,7 +1,6 @@
-mat-card {
+mat-card, mat-toolbar {
   margin: 20px;
   width: 70%;
-  height: 80px;
 }
 
 button {
@@ -14,4 +13,12 @@ button {
 
 .card-button {
   float: right;
+}
+
+.search-result {
+  background-color: aliceblue;
+}
+
+.search-result-error {
+  background-color: lightsalmon;
 }

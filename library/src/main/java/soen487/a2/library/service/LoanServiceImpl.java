@@ -10,6 +10,7 @@ import soen487.a2.library.dataobject.Member;
 import soen487.a2.library.error.BusinessException;
 import soen487.a2.library.error.EmBusinessError;
 import soen487.a2.library.model.LoanModel;
+import soen487.a2.library.model.MemberModel;
 import soen487.a2.library.repository.BookJpaRepository;
 import soen487.a2.library.repository.LoanJpaRepository;
 import soen487.a2.library.repository.MemberJpaRepository;
@@ -31,6 +32,18 @@ public class LoanServiceImpl implements LoanService {
         this.bookJpaRepository = bookJpaRepository;
         this.loanJpaRepository = loanJpaRepository;
         this.memberJpaRepository = memberJpaRepository;
+    }
+
+    @Override
+    public List<LoanModel> getAllLoans() {
+        List<Loan> list = loanJpaRepository.findAll();
+        List<LoanModel> loanModels = new ArrayList<>();
+        for (Loan loan : list) {
+            LoanModel loanModel = new LoanModel();
+            BeanUtils.copyProperties(loan, loanModel);
+            loanModels.add(loanModel);
+        }
+        return loanModels;
     }
 
     @Override

@@ -1,1 +1,58 @@
-<p>loan works!</p>
+<mat-toolbar>
+  <mat-toolbar-row>
+    <button mat-raised-button color="primary" (click)="addLoan()">
+      Borrow
+    </button>
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+      <form (ngSubmit)="onSearch(f)" #f="ngForm" fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field>
+          <mat-label>Search By</mat-label>
+          <mat-select (selectionChange)=change($event)>
+            <mat-option *ngFor="let option of options" [value]="option.value">
+              {{option.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput class="form-control" ngModel name="search">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Search</button>
+      </form>
+      <button mat-raised-button color="accent" (click)="listLoans()">Display All Loans</button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-card class="search-result" *ngIf="loan != null">
+  <mat-card-content>
+    <h1>Search Result:</h1>
+    <h3>ID: {{loan.id}} </h3>
+    <mat-card-title>{{loan.member}} borrowed {{loan.title}}</mat-card-title>
+    <h3>Borrow Date: {{loan.borrowdate}}</h3>
+    <h3>Return Date: {{loan.returndate}}</h3>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="search-result-error" *ngIf="searched && loan == null">
+  <mat-card-content>
+    <h1>Cannot find any result.</h1>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="card" *ngFor="let loan of loans; let i = index">
+  <mat-card-content>
+    <h3>ID: {{loan.id}} </h3>
+    <mat-card-title>{{loan.member}} borrowed {{loan.title}}
+      <button class="card-button" mat-icon-button (click)="confirmDelete(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button class="card-button" mat-icon-button (click)="editLoan(loan)">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-card-title>
+    <h3>Borrow Date: {{loan.borrowdate}}</h3>
+    <h3>Return Date: {{loan.returndate}}</h3>
+  </mat-card-content>
+</mat-card>
+
+

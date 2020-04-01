@@ -1,0 +1,26 @@
+<h2>{{pageTitle}}</h2>
+<mat-card class="card" *ngIf="editMode">
+  <mat-card-content>
+    <mat-card-title>{{member.name}}</mat-card-title>
+    <h3>Contact: {{member.contact}}</h3>
+  </mat-card-content>
+</mat-card>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="container">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput class="form-control" ngModel placeholder="Member name" name="name" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Contact</mat-label>
+      <input matInput ngModel class="form-control" id="contact" placeholder="contact" name="contact" required>
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" type="submit">Save</button>
+  <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+</form>
+
+
+

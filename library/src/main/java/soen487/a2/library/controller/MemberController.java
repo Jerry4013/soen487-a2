@@ -32,6 +32,12 @@ public class MemberController {
         return CommonReturnType.create(member);
     }
 
+    @GetMapping(value = "/name")
+    public CommonReturnType getMemberByName(@RequestParam String name) {
+        MemberModel member = memberService.getMemberByName(name);
+        return CommonReturnType.create(member);
+    }
+
     @PostMapping()
     public CommonReturnType addMember(@RequestBody MemberModel memberModel) {
         MemberModel member = memberService.addMember(memberModel);

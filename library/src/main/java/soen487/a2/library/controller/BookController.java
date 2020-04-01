@@ -31,6 +31,24 @@ public class BookController {
         return CommonReturnType.create(book);
     }
 
+    @GetMapping(value = "/title")
+    public CommonReturnType getBookByTitle(@RequestParam String title) {
+        BookModel book = bookService.getBookByTitle(title);
+        return CommonReturnType.create(book);
+    }
+
+    @GetMapping(value = "/author")
+    public CommonReturnType getBookByAuthor(@RequestParam String author) {
+        BookModel book = bookService.getBookByAuthor(author);
+        return CommonReturnType.create(book);
+    }
+
+    @GetMapping(value = "/isbn")
+    public CommonReturnType getBookByIsbn(@RequestParam String isbn) {
+        BookModel book = bookService.getBookByIsbn(isbn);
+        return CommonReturnType.create(book);
+    }
+
     @PutMapping()
     public CommonReturnType updateBook(@RequestBody BookModel bookModel) {
         BookModel newBook = bookService.updateBook(bookModel);

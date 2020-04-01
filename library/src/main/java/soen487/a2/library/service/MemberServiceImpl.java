@@ -50,6 +50,17 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public MemberModel getMemberByName(String name) {
+        Member member = memberJpaRepository.getMemberByName(name);
+        if (member == null) {
+            throw new BusinessException(EmBusinessError.MEMBER_NOT_EXIST);
+        }
+        MemberModel memberModel = new MemberModel();
+        BeanUtils.copyProperties(member, memberModel);
+        return memberModel;
+    }
+
+    @Override
     @Transactional
     public MemberModel addMember(MemberModel memberModel) {
         if (memberModel == null) {

@@ -7,7 +7,16 @@ export const environment = {
   baseUrl: 'http://localhost:8080',
   book: '/book',
   list: '/list',
-  auth: '/auth'
+  auth: '/auth',
+  title: '/title',
+  author: '/author',
+  isbn: '/isbn',
+  member: '/member',
+  name: '/name',
+  loan: '/loan',
+  listbybook: '/listbybook',
+  listbymember: '/listbymember',
+  returnBook: '/return'
 };
 
 /*

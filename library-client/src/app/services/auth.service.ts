@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {CommonReturnType} from './models/CommonReturnType';
-import {environment} from '../environments/environment';
+import {CommonReturnType} from '../models/CommonReturnType';
+import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 
 @Injectable()

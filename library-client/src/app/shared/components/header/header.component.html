@@ -7,14 +7,14 @@
     <span> Library Admin System </span>
 
     <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
-      <ul fxLayout="row" fxLayoutGap="20px">
+      <ul fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="flex-end">
+<!--        <li>-->
+<!--          <button mat-icon-button>-->
+<!--            <mat-icon>settings</mat-icon>-->
+<!--          </button>-->
+<!--        </li>-->
         <li>
-          <button mat-icon-button>
-            <mat-icon>settings</mat-icon>
-          </button>
-        </li>
-        <li>
-          <button mat-icon-button>
+          <button mat-icon-button (click)="help()">
             <mat-icon>help_outline</mat-icon>
           </button>
         </li>

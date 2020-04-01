@@ -1,9 +1,15 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {BookModel} from '../../models/book.model';
-import {BookService} from '../../book.service';
+import {BookService} from '../../services/book.service';
 import {Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {NgForm} from '@angular/forms';
+import {MatSelectChange} from '@angular/material/select';
 
+interface Option {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-library',
@@ -12,8 +18,16 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 })
 export class LibraryComponent implements OnInit {
 
-  display = false;
+  book: BookModel;
   books: BookModel[] = [];
+  options: Option[] = [
+    {value: 'id-0', viewValue: 'id'},
+    {value: 'title-1', viewValue: 'title'},
+    {value: 'author-2', viewValue: 'author'},
+    {value: 'isbn-3', viewValue: 'ISBN'}
+  ];
+  option: string;
+  searched: boolean;
 
   constructor(private bookService: BookService, private router: Router, public dialog: MatDialog) { }
 
@@ -29,20 +43,68 @@ export class LibraryComponent implements OnInit {
     this.router.navigate(['/addbook']);
   }
 
-  editbook(i: number) {
-    console.log(this.books[i]);
+  editBook(book: BookModel) {
+    this.bookService.editMode = true;
+    this.bookService.book = book;
+    this.router.navigate(['/addbook']);
   }
 
-  confirmdelete(i: number) {
+  confirmDelete(i: number) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '250px',
       data: this.books[i].id
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
+      if (result) {
+        this.bookService.deleteBook(this.books[i].id).subscribe(
+          () => {
+            this.bookService.getBooks().subscribe(
+              books => {
+                this.books = (books as BookModel[]);
+              }
+            );
+          }
+        );
+      }
     });
+  }
+
+  onSearch(f: NgForm) {
+    const value = f.value;
+    if (this.option === 'id-0') {
+      this.bookService.getBookById(value.search).subscribe(
+        data => {
+          this.searched = true;
+          this.book = (data as BookModel);
+        }
+      );
+    } else if (this.option === 'title-1') {
+      this.bookService.getBookByTitle(value.search).subscribe(
+        data => {
+          this.searched = true;
+          this.book = (data as BookModel);
+        }
+      );
+    } else if (this.option === 'author-2') {
+      this.bookService.getBookByAuthor(value.search).subscribe(
+        data => {
+          this.searched = true;
+          this.book = (data as BookModel);
+        }
+      );
+    } else if (this.option === 'isbn-3') {
+      this.bookService.getBookByIsbn(value.search).subscribe(
+        data => {
+          this.searched = true;
+          this.book = (data as BookModel);
+        }
+      );
+    }
+  }
+
+  change($event: MatSelectChange) {
+    this.option = $event.value;
   }
 }
 

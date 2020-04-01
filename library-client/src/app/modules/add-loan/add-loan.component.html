@@ -1,0 +1,39 @@
+<h2>{{pageTitle}}</h2>
+<mat-card class="card" *ngIf="editMode">
+  <mat-card-content>
+    <mat-card-title>{{loan.member}} borrowed {{loan.title}}</mat-card-title>
+    <h3>Borrow Date: {{loan.borrowdate}}</h3>
+    <h3>Return Date: {{loan.returndate}}</h3>
+  </mat-card-content>
+</mat-card>
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="container">
+    <mat-form-field>
+      <mat-label>Book</mat-label>
+      <input matInput ngModel class="form-control" placeholder="Book title" name="title" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Member</mat-label>
+      <input matInput ngModel class="form-control" placeholder="Member name" name="member" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Borrow Date</mat-label>
+      <input matInput ngModel class="form-control" name="borrowdate" [matDatepicker]="borrowdate">
+      <mat-datepicker-toggle matSuffix [for]="borrowdate"></mat-datepicker-toggle>
+      <mat-datepicker #borrowdate></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Return Date</mat-label>
+      <input matInput ngModel class="form-control" name="returndate" [matDatepicker]="returndate">
+      <mat-datepicker-toggle matSuffix [for]="returndate"></mat-datepicker-toggle>
+      <mat-datepicker #returndate></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button color="primary" type="submit">Save</button>
+  <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+</form>
+

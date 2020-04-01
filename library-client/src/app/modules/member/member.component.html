@@ -1,1 +1,54 @@
-<p>member works!</p>
+<mat-toolbar>
+  <mat-toolbar-row>
+    <button mat-raised-button color="primary" (click)="addMember()">
+      New Member
+    </button>
+    <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+      <form (ngSubmit)="onSearch(f)" #f="ngForm" fxLayout="row" fxLayoutGap="20px">
+        <mat-form-field>
+          <mat-label>Search By</mat-label>
+          <mat-select (selectionChange)=change($event)>
+            <mat-option *ngFor="let option of options" [value]="option.value">
+              {{option.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput class="form-control" ngModel name="search">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Search</button>
+      </form>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-card class="search-result" *ngIf="member != null">
+  <mat-card-content>
+    <h1>Search Result:</h1>
+    <mat-card-title>(ID: {{member.id}}) {{member.name}}
+    </mat-card-title>
+    <h3>Contact: {{member.contact}}</h3>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="search-result-error" *ngIf="searched && member == null">
+  <mat-card-content>
+    <h1>Cannot find any result.</h1>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="card" *ngFor="let member of members; let i = index">
+  <mat-card-content>
+    <mat-card-title>(ID: {{member.id}}) {{member.name}}
+      <button class="card-button" mat-icon-button (click)="confirmDelete(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button class="card-button" mat-icon-button (click)="editMember(member)">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </mat-card-title>
+    <h3>Contact: {{member.contact}}</h3>
+  </mat-card-content>
+</mat-card>
+
+
