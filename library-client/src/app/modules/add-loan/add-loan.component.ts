@@ -5,6 +5,8 @@ import {NgForm} from '@angular/forms';
 import {LoanModel} from '../../models/loan.model';
 import {LoanService} from '../../services/loan.service';
 import {DatePipe} from '@angular/common';
+import {CommonReturnType} from '../../models/CommonReturnType';
+import {ErrorModel} from '../../models/error.model';
 
 
 @Component({
@@ -17,6 +19,7 @@ export class AddLoanComponent implements OnInit {
   loan: LoanModel = this.loanService.loan;
   editMode = this.loanService.editMode;
   pageTitle: string;
+  errorMessage: string;
 
   constructor(private loanService: LoanService,
               private route: ActivatedRoute,
@@ -42,8 +45,13 @@ export class AddLoanComponent implements OnInit {
     const loanModel = new LoanModel(id, value.title, value.member, borrowDate, returnDate);
     if (!this.editMode) {
       this.loanService.addLoan(loanModel).subscribe(
-        () => {
-          this.router.navigate(['/loan']);
+        responseData => {
+          const data = (responseData as CommonReturnType);
+          if (data.status === 'success') {
+            this.router.navigate(['/loan']);
+          } else {
+            this.errorMessage = (data.data as ErrorModel).errMsg;
+          }
         }
       );
     } else {

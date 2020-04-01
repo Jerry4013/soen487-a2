@@ -9,16 +9,17 @@
   <div class="container">
     <mat-form-field>
       <mat-label>Name</mat-label>
-      <input matInput class="form-control" ngModel placeholder="Member name" name="name" required>
+      <input matInput maxlength="150" class="form-control" ngModel placeholder="Member name" name="name" required>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Contact</mat-label>
-      <input matInput ngModel class="form-control" id="contact" placeholder="contact" name="contact" required>
+      <input matInput ngModel maxlength="150" class="form-control" id="contact"
+             placeholder="contact" name="contact" required>
     </mat-form-field>
   </div>
 
-  <button mat-raised-button color="primary" type="submit">Save</button>
+  <button mat-raised-button color="primary" [disabled]="!f.valid" type="submit">Save</button>
   <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
 </form>
 

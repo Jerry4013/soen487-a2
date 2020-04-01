@@ -89,12 +89,24 @@ public class LoanServiceImpl implements LoanService {
         return loanModel;
     }
 
-    @Override
-    @Transactional
-    public LoanModel borrow(LoanModel loanModel) {
+    private void validateLoan(LoanModel loanModel) {
         if (loanModel == null) {
             throw new BusinessException(EmBusinessError.PARAMETER_VALIDATION_ERROR);
         }
+        Book book = bookJpaRepository.getBookByTitle(loanModel.getTitle());
+        if (book == null) {
+            throw new BusinessException(EmBusinessError.BOOK_NOT_EXIST);
+        }
+        Member member = memberJpaRepository.getMemberByName(loanModel.getMember());
+        if (member == null) {
+            throw new BusinessException(EmBusinessError.MEMBER_NOT_EXIST);
+        }
+    }
+
+    @Override
+    @Transactional
+    public LoanModel borrow(LoanModel loanModel) {
+        validateLoan(loanModel);
         Loan loan = new Loan();
         BeanUtils.copyProperties(loanModel, loan);
         Loan save = loanJpaRepository.save(loan);

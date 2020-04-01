@@ -12,32 +12,35 @@
   <div class="container">
     <mat-form-field>
       <mat-label>Title</mat-label>
-      <input matInput class="form-control" ngModel placeholder="book title" name="title" required>
+      <input matInput maxlength="150" class="form-control" ngModel placeholder="book title" name="title" required>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Description</mat-label>
-      <textarea matInput ngModel rows="5" class="form-control" id="description" placeholder="book description"
-                name="description" required></textarea>
+      <textarea maxlength="255" matInput ngModel rows="5" class="form-control" id="description"
+                placeholder="book description" name="description" required></textarea>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>ISBN</mat-label>
-      <input matInput ngModel class="form-control" id="isbn" placeholder="book isbn" name="isbn" required>
+      <input maxlength="20" matInput ngModel class="form-control" id="isbn"
+             placeholder="book isbn" name="isbn" required>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Author</mat-label>
-      <input matInput ngModel class="form-control" id="author" placeholder="book author" name="author" required>
+      <input matInput ngModel maxlength="150" class="form-control" id="author"
+             placeholder="book author" name="author" required>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Publisher</mat-label>
-      <input matInput ngModel class="form-control" id="publisher" placeholder="book publisher" name="publisher" required>
+      <input matInput ngModel maxlength="150" class="form-control" id="publisher"
+             placeholder="book publisher" name="publisher" required>
     </mat-form-field>
   </div>
 
-  <button mat-raised-button color="primary" type="submit">Save</button>
+  <button mat-raised-button color="primary" [disabled]="!f.valid"  type="submit">Save</button>
   <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
 </form>
 

@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {MemberModel} from '../models/member.model';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {LoanModel} from '../models/loan.model';
 import {CommonReturnType} from '../models/CommonReturnType';
@@ -21,7 +20,7 @@ export class LoanService {
       .get<CommonReturnType>(
         environment.baseUrl + environment.loan + environment.list,
         {
-          headers: new HttpHeaders({ 'withCredentials': 'true'}),
+          headers: new HttpHeaders({ withCredentials: 'true'}),
         }
       ).pipe(map(responseData => {
           if (responseData.status === 'success') {
@@ -36,7 +35,7 @@ export class LoanService {
       .get<CommonReturnType>(
         environment.baseUrl + environment.loan + '/' + id,
         {
-          headers: new HttpHeaders({ 'withCredentials': 'true'}),
+          headers: new HttpHeaders({ withCredentials: 'true'}),
         }
       ).pipe(map(responseData => {
           if (responseData.status === 'success') {
@@ -54,7 +53,7 @@ export class LoanService {
         environment.baseUrl + environment.loan + environment.listbybook,
         {
           params: httpParams,
-          headers: new HttpHeaders({ 'withCredentials': 'true'}),
+          headers: new HttpHeaders({ withCredentials: 'true'}),
         }
       ).pipe(map(responseData => {
           if (responseData.status === 'success') {
@@ -72,7 +71,7 @@ export class LoanService {
         environment.baseUrl + environment.loan + environment.listbymember,
         {
           params: httpParams,
-          headers: new HttpHeaders({ 'withCredentials': 'true'}),
+          headers: new HttpHeaders({ withCredentials: 'true'}),
         }
       ).pipe(map(responseData => {
           if (responseData.status === 'success') {
@@ -88,13 +87,8 @@ export class LoanService {
         environment.baseUrl + environment.loan,
         loanModel,
         {
-          headers: new HttpHeaders({ 'withCredentials': 'true'}),
+          headers: new HttpHeaders({ withCredentials: 'true'}),
         }
-      ).pipe(map(responseData => {
-          if (responseData.status === 'success') {
-            return responseData.data;
-          }
-        })
       );
   }
 

@@ -10,30 +10,30 @@
   <div class="container">
     <mat-form-field>
       <mat-label>Book</mat-label>
-      <input matInput ngModel class="form-control" placeholder="Book title" name="title" required>
+      <input matInput ngModel maxlength="150" class="form-control" placeholder="Book title" name="title" required>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Member</mat-label>
-      <input matInput ngModel class="form-control" placeholder="Member name" name="member" required>
+      <input matInput ngModel maxlength="150" class="form-control" placeholder="Member name" name="member" required>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Borrow Date</mat-label>
-      <input matInput ngModel class="form-control" name="borrowdate" [matDatepicker]="borrowdate">
+      <input matInput ngModel maxlength="150" class="form-control" name="borrowdate" [matDatepicker]="borrowdate">
       <mat-datepicker-toggle matSuffix [for]="borrowdate"></mat-datepicker-toggle>
       <mat-datepicker #borrowdate></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Return Date</mat-label>
-      <input matInput ngModel class="form-control" name="returndate" [matDatepicker]="returndate">
+      <input matInput ngModel maxlength="150" class="form-control" name="returndate" [matDatepicker]="returndate">
       <mat-datepicker-toggle matSuffix [for]="returndate"></mat-datepicker-toggle>
       <mat-datepicker #returndate></mat-datepicker>
     </mat-form-field>
   </div>
-
-  <button mat-raised-button color="primary" type="submit">Save</button>
+  <mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
+  <button mat-raised-button color="primary" [disabled]="!f.valid" type="submit">Save</button>
   <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
 </form>
 
