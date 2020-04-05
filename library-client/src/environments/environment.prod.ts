@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://soen487-library.herokuapp.com',
+  baseUrl: 'https://soen487-library.herokuapp.com/',
   book: '/book',
   list: '/list',
   auth: '/auth',
