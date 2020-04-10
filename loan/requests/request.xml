@@ -3,7 +3,7 @@
     <soapenv:Header/>
     <soapenv:Body>
         <gs:getMemberInfoRequest>
-            <gs:id>3</gs:id>
+            <gs:id>5</gs:id>
         </gs:getMemberInfoRequest>
     </soapenv:Body>
 </soapenv:Envelope>

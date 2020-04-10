@@ -3,12 +3,15 @@ package soen487.a2.loan.endpoint;
 import io.spring.guides.gs_producing_web_service.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import soen487.a2.loan.CommonReturnType;
 import soen487.a2.loan.dataobject.LoanDao;
+import soen487.a2.loan.exception.MemberNotFoundException;
 import soen487.a2.loan.exception.ServiceFaultException;
 import soen487.a2.loan.service.LoanService;
 
@@ -62,8 +65,11 @@ public class LoanEndpoint {
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "borrowRequest")
     @ResponsePayload
-    public BorrowResponse borrow(@RequestPayload BorrowRequest request) {
+    public BorrowResponse borrow(@RequestPayload BorrowRequest request) throws MemberNotFoundException {
         BorrowResponse response = new BorrowResponse();
+        if (!checkBook(request.getTitle())) {
+            throw new MemberNotFoundException("Book not exist");
+        }
         LoanDao loanDao = new LoanDao();
         loanDao.setTitle(request.getTitle());
         loanDao.setMember(request.getMember());
@@ -74,6 +80,16 @@ public class LoanEndpoint {
         BeanUtils.copyProperties(newBorrow, loan);
         response.setLoan(loan);
         return response;
+    }
+
+    private boolean checkBook(String title) throws MemberNotFoundException {
+        String url = "http://localhost:8080/book/title?title=" + title;
+        RestTemplate restTemplate = new RestTemplate();
+        CommonReturnType returnType = restTemplate.getForObject(url, CommonReturnType.class);
+        if (returnType == null || returnType.getStatus().equals("fail")) {
+            throw new MemberNotFoundException("Invalid Member Id");
+        }
+        return true;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "updateLoanRequest")
