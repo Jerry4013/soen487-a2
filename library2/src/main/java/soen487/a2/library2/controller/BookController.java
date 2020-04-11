@@ -9,6 +9,8 @@ import soen487.a2.library2.model.BookList;
 import soen487.a2.library2.model.BookModel;
 import soen487.a2.library2.service.BookService;
 
+import java.util.Arrays;
+
 
 @RestController
 @RequestMapping("/book")
@@ -24,10 +26,22 @@ public class BookController {
         return new XsltModelAndView("book-process", myBookList);
     }
 
+    @GetMapping(value = "/text/list")
+    public String getListText() {
+        BookModel[] list = bookService.list();
+        return Arrays.toString(list);
+    }
+
     @GetMapping(value = "/{id}")
     public CommonReturnType getBookById(@PathVariable String id) {
         BookModel book = bookService.getBookById(Integer.parseInt(id));
         return CommonReturnType.create(book);
+    }
+
+    @GetMapping(value = "/text/{id}")
+    public String getBookTextById(@PathVariable String id) {
+        BookModel book = bookService.getBookById(Integer.parseInt(id));
+        return book.toString();
     }
 
     @PutMapping()
